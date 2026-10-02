@@ -1,12 +1,13 @@
 === Grid Element Trash ===
-Contributors: edwardbock
+Contributors: palasthotel, janaeggebrecht, edwardbock
 Donate link: http://palasthotel.de/
 Tags: grid, extension, trash
 Requires at least: 4.0
-Tested up to: 5.8.2
+Requires PHP: 7.4
+Tested up to: 7.1.2
 Stable tag: 1.1.2
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl
+License: GPL-3.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 You can hide containers and boxes from the Grid toolbar.
 
