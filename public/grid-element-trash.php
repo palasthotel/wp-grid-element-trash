@@ -6,7 +6,7 @@ namespace GridElementTrash;
  * The plugin bootstrap file
  *
  * Plugin Name:       Grid Element Trash
- * Plugin URI:        https://github.com/palasthotel/grid-element-trash-wordpress
+ * Plugin URI:        https://github.com/palasthotel/wp-grid-element-trash
  * Description:       Extends Grid with a trash for containers and boxes
  * Version:           1.1.3
  * Author:            Palasthotel <webmaster@palasthotel.de>
