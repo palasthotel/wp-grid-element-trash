@@ -5,7 +5,7 @@ Tags: grid, extension, trash
 Requires at least: 4.0
 Requires PHP: 7.4
 Tested up to: 7.1.2
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,6 +32,10 @@ This plugin extends the grid plugin. You can hide containers and boxes from the 
 
 
 == Changelog ==
+
+= 1.1.3 =
+**Bug Fixes**
+* require a nonce and manage_options for the trash toggle (2701f3f)
 
 = 1.1.2 =
  * Compatibility bugfix for Grid 2.+
