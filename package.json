@@ -1,0 +1,19 @@
+{
+	"name": "@palasthotel/grid-element-trash",
+	"version": "1.1.2",
+	"private": true,
+	"description": "Extends Grid with a trash for containers and boxes.",
+	"license": "GPL-3.0-or-later",
+	"author": {
+		"name": "Palasthotel",
+		"email": "webmaster@palasthotel.de",
+		"url": "https://palasthotel.de"
+	},
+	"repository": "git+https://github.com/palasthotel/wp-grid-element-trash.git",
+	"bugs": {
+		"url": "https://github.com/palasthotel/wp-grid-element-trash/issues"
+	},
+	"scripts": {
+		"pack": "SLUG=grid-element-trash bash ../github-workflows/wp-plugin/bin/pack.sh"
+	}
+}
