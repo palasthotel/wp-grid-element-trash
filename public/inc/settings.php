@@ -9,6 +9,13 @@ namespace GridElementTrash;
 class Settings {
 	
 	const PAGE = "settings-grid-element-trash";
+
+	const AJAX_ACTION = "grid_element_trash_change_option";
+
+	/**
+	 * @var Plugin
+	 */
+	public $plugin;
 	
 	/**
 	 * Settings constructor.
@@ -19,7 +26,7 @@ class Settings {
 		$this->plugin = $plugin;
 		
 		add_action( 'admin_menu', array( $this, 'menu_page' ), 15 );
-		add_action( 'wp_ajax_grid_element_trash_change_option', array( $this, 'change_option') );
+		add_action( 'wp_ajax_' . self::AJAX_ACTION, array( $this, 'change_option') );
 		
 	}
 	
@@ -45,23 +52,23 @@ class Settings {
 		
 		if(class_exists('\grid_grid')){
 			
-			/**
-			 * style for settingspage
-			 */
-			wp_enqueue_style(
-				'style-settings-page',
-				$this->plugin->url.'/css/settings-page.css'
-			);
-			
-			/**
-			 * add js for settingspage
-			 */
 			wp_enqueue_script(
-				'script-settings-page',
-				$this->plugin->url.'/js/settings-page.js' ,
-				array( 'jquery' )
+				'grid-element-trash-settings-page',
+				$this->plugin->url . 'js/settings-page.js',
+				array(),
+				filemtime( $this->plugin->path . 'js/settings-page.js' ),
+				true
 			);
-			
+			wp_localize_script(
+				'grid-element-trash-settings-page',
+				'GridElementTrash',
+				array(
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'action'  => self::AJAX_ACTION,
+					'nonce'   => wp_create_nonce( self::AJAX_ACTION ),
+				)
+			);
+
 			/**
 			 * get the grid storage
 			 */
@@ -88,13 +95,25 @@ class Settings {
 	 * change option ajax endpoint
 	 */
 	public function change_option(){
-		
-		$element = sanitize_text_field($_GET["element"]);
-		$type = sanitize_text_field( $_GET["type"] );
-		$disabled = intval( $_GET["value"] );
-		
+
+		check_ajax_referer( self::AJAX_ACTION );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json(
+				(object) array(
+					"error"     => true,
+					"error_msg" => "You are not allowed to change the Grid trash.",
+				),
+				403
+			);
+		}
+
+		$element  = isset( $_POST["element"] ) ? sanitize_text_field( wp_unslash( $_POST["element"] ) ) : "";
+		$type     = isset( $_POST["type"] ) ? sanitize_text_field( wp_unslash( $_POST["type"] ) ) : "";
+		$disabled = isset( $_POST["value"] ) ? intval( $_POST["value"] ) : 0;
+
 		$trash = new Store();
-		
+
 		$return = (object) array(
 			"error" => false,
 			"error_msg" => "",
@@ -112,8 +131,7 @@ class Settings {
 			$return->error = true;
 			$return->error_msg = "Could not find matching element";
 		}
-		echo json_encode($return);
-		exit;
+		wp_send_json( $return );
 	}
 	
 }

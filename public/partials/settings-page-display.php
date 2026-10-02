@@ -27,7 +27,7 @@ use GridElementTrash\Store;
 				if( !$trash->is_container_trashed($type) ){
 					$checked = 'checked="checked"';
 				}
-				echo "<li><input class='trash-check check-container' type='checkbox' data-element='container' $checked name='$type' /> ".$type."</li>";
+				echo "<li><input class='trash-check check-container' type='checkbox' data-element='container' $checked name='".esc_attr($type)."' /> ".esc_html($type)."</li>";
 			}
 
 			?>
@@ -45,7 +45,7 @@ use GridElementTrash\Store;
 					if( $trash->is_reuse_container_trashed($id) ){
 						$checked = '';
 					}
-					echo "<li><input class='trash-check check-container' type='checkbox' data-element='reuse-container' $checked name='$id' /> ".$title."</li>";
+					echo "<li><input class='trash-check check-container' type='checkbox' data-element='reuse-container' $checked name='".esc_attr($id)."' /> ".esc_html($title)."</li>";
 				}
 
 				?>
@@ -86,7 +86,7 @@ use GridElementTrash\Store;
 						$checked = 'checked="checked"';
 					}
 					?>
-						<dd><?php echo "<input class='trash-check check-box' type='checkbox' data-element='box' $checked name='$trashid' />".$display; ?></dd>
+						<dd><?php echo "<input class='trash-check check-box' type='checkbox' data-element='box' $checked name='".esc_attr($trashid)."' />".$display; ?></dd>
 
 					<?php
 				}

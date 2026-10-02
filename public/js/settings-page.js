@@ -1,20 +1,26 @@
-(function( $ ) {
+(function () {
 	'use strict';
 
-	$(".grid-element-trash-wrapper").on("click", ".trash-check", function(e){
-		var $item = $(e.target);
-		$.ajax({
-			url: ajaxurl,
-			data: {
-				action: "grid_element_trash_change_option",
-				element: $item.data("element"),
-				type: $item.attr("name"),
-				value: ($item.is(":checked"))? 0: 1,
-			}, 
-			success: function(data){
-				console.log(data);
-			}
+	var settings = window.GridElementTrash || {};
+
+	document.addEventListener('click', function (e) {
+		var item = e.target;
+		if (!item.classList || !item.classList.contains('trash-check')) {
+			return;
+		}
+
+		var body = new URLSearchParams();
+		body.set('action', settings.action);
+		body.set('_wpnonce', settings.nonce);
+		body.set('element', item.getAttribute('data-element'));
+		body.set('type', item.getAttribute('name'));
+		body.set('value', item.checked ? 0 : 1);
+
+		fetch(settings.ajaxUrl, {
+			method: 'POST',
+			credentials: 'same-origin',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: body.toString()
 		});
 	});
-
-})( jQuery );
+})();
