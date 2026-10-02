@@ -1,0 +1,19 @@
+name: PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: palasthotel/github-workflows/.github/workflows/wp-plugin-pr.yml@v1
+    with:
+      slug: grid-element-trash
+      dev-plugin-name: Grid Element Trash - DEV
+      required-files: |
+        js/settings-page.js
+        css/settings-page.css
