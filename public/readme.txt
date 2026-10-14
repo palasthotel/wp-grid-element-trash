@@ -17,6 +17,8 @@ This plugin extends the grid plugin. You can hide containers and boxes from the 
 
 == Installation ==
 
+Requires the [Grid](https://wordpress.org/plugins/grid/) plugin. Since WordPress 6.5 this plugin can only be activated while Grid is active.
+
 1. Upload `grid-element-trash.zip` to the `/wp-content/plugins/` directory
 1. Extract the Plugin to a `grid-element-trash` Folder
 1. Activate the plugin through the 'Plugins' menu in WordPress
