@@ -12,9 +12,6 @@ jobs:
   checks:
     uses: palasthotel/github-workflows/.github/workflows/wp-plugin-pr.yml@v1
     with:
-      # Plugin Check reports errors on this plugin - see https://github.com/palasthotel/wp-grid-element-trash/issues/9.
-      # Remove this line once they are fixed.
-      plugin-check: false
       slug: grid-element-trash
       dev-plugin-name: Grid Element Trash - DEV
       required-files: |
