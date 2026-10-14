@@ -29,6 +29,26 @@ if ( ! defined( 'WPINC' ) ) {
 class Plugin{
 	
 	const DOMAIN = "grid-element-trash";
+
+	/**
+	 * @var string
+	 */
+	public $url;
+
+	/**
+	 * @var string
+	 */
+	public $path;
+
+	/**
+	 * @var Settings
+	 */
+	public $settings;
+
+	/**
+	 * @var ElementsFilter
+	 */
+	public $elements_filter;
 	
 	function __construct() {
 		
