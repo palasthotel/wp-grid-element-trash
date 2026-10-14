@@ -4,7 +4,11 @@ namespace GridElementTrash;
 
 
 class ElementsFilter {
-	
+
+	/**
+	 * @var Plugin
+	 */
+	public $plugin;
 	
 	/**
 	 * ElementsFilter constructor.

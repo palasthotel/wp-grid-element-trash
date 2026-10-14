@@ -10,6 +10,11 @@
 
 use GridElementTrash\Store;
 
+defined( 'ABSPATH' ) || exit;
+
+// This template is included from Settings::render_settings(), so its variables are local to that method.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 ?>
 
 <div class="wrap grid-element-trash-wrapper">
@@ -23,11 +28,9 @@ use GridElementTrash\Store;
 			foreach ($containers as $container) {
 				$type = $container["type"];
 				if(strpos($type, "c-") !== 0) continue;
-				$checked = '';
-				if( !$trash->is_container_trashed($type) ){
-					$checked = 'checked="checked"';
-				}
-				echo "<li><input class='trash-check check-container' type='checkbox' data-element='container' $checked name='".esc_attr($type)."' /> ".esc_html($type)."</li>";
+				?>
+				<li><input class='trash-check check-container' type='checkbox' data-element='container' <?php checked( ! $trash->is_container_trashed( $type ) ); ?> name='<?php echo esc_attr( $type ); ?>' /> <?php echo esc_html( $type ); ?></li>
+				<?php
 			}
 
 			?>
@@ -41,11 +44,9 @@ use GridElementTrash\Store;
 				    $title = $container->reusetitle;
 					$type = $container->type;
 					$id = $container->containerid;
-					$checked = 'checked="checked"';
-					if( $trash->is_reuse_container_trashed($id) ){
-						$checked = '';
-					}
-					echo "<li><input class='trash-check check-container' type='checkbox' data-element='reuse-container' $checked name='".esc_attr($id)."' /> ".esc_html($title)."</li>";
+					?>
+					<li><input class='trash-check check-container' type='checkbox' data-element='reuse-container' <?php checked( ! $trash->is_reuse_container_trashed( $id ) ); ?> name='<?php echo esc_attr( $id ); ?>' /> <?php echo esc_html( $title ); ?></li>
+					<?php
 				}
 
 				?>
@@ -65,7 +66,7 @@ use GridElementTrash\Store;
 			?>
 			<dl>
 				
-				<dt><?php echo $class; ?></dt>
+				<dt><?php echo esc_html( $class ); ?></dt>
 				
 				<?php
 				foreach ($searchresult as $key => $box) 
@@ -75,18 +76,13 @@ use GridElementTrash\Store;
 					 */
 					$type = $box->type();
 					$display = $box->render(true);
-					$checked = '';
 					$trashid = $type;
 					if($type == "reference")
 					{
 						$trashid = "reference-".$box->content->boxid;
 					}
-					if( !$trash->is_box_trashed($trashid) )
-					{
-						$checked = 'checked="checked"';
-					}
 					?>
-						<dd><?php echo "<input class='trash-check check-box' type='checkbox' data-element='box' $checked name='".esc_attr($trashid)."' />".$display; ?></dd>
+						<dd><input class='trash-check check-box' type='checkbox' data-element='box' <?php checked( ! $trash->is_box_trashed( $trashid ) ); ?> name='<?php echo esc_attr( $trashid ); ?>' /><?php echo wp_kses_post( $display ); ?></dd>
 
 					<?php
 				}
