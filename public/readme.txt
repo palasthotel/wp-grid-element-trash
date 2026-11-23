@@ -5,7 +5,7 @@ Tags: grid, extension, trash
 Requires at least: 4.0
 Requires PHP: 8.0
 Tested up to: 7.1
-Stable tag: 1.1.3
+Stable tag: 2.0.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,6 +34,18 @@ Requires the [Grid](https://wordpress.org/plugins/grid/) plugin. Since WordPress
 
 
 == Changelog ==
+
+= 2.0.0 =
+**⚠ BREAKING CHANGES**
+* requires PHP 8.0 or newer
+
+**Features**
+* declare Grid as a required plugin (78baff6)
+* declare Grid as a required plugin (cd39e37)
+* drop support for PHP 7.4 (107eb4d)
+
+**Bug Fixes**
+* declare plugin properties to avoid PHP 8.2 deprecation notices (90219e9)
 
 = 1.1.3 =
 **Bug Fixes**
